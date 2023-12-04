@@ -87,7 +87,7 @@ class CardGenerator:
         self.used = {}
                 
     def _generate_key(self, p_dict):
-        rnd = random.uniform(0, 1)
+        rnd = random.randrange(0, 100)
         accum = 0
         for key in p_dict:
             accum += p_dict[key]

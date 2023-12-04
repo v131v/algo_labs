@@ -1,3 +1,0 @@
-mastercard 0.3
-visa 0.3
-mir 0.4

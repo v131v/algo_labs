@@ -1,4 +1,0 @@
-sberbank 0.25
-tinkoff 0.25
-vtb 0.25
-alphabank 0.25
