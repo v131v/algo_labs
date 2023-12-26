@@ -1,5 +1,5 @@
 import random
-
+import pandas
 from generators import *
 
 
@@ -76,36 +76,30 @@ def compute(n, out_file, banks_p, systems_p):
 
     cardGen = CardGenerator(banks_p, systems_p, card_keys)
 
-    out = open(out_file, "w")
+    data = {
+        "Name": [],
+        "Passport": [],
+        "Snils": [],
+        "Symptoms": [],
+        "Analyzis": [],
+        "Doctor": [],
+        "DateStart": [],
+        "DateEnd": [],
+        "Price": [],
+        "Card": [],
+    }
 
     for i in range(n):
-        name = namesGen[random.randrange(2)].generate()
-        passport = passportGen.generate()
-        snils = snilsGen.generate()
-        curSymptoms = sympGen.generate()
-        curAnalyzis = analyzisGen.generate()
-        doctor = random.choice(doctors)
-        start = dateGen.generate()
-        end = dateGen.generate()
-        price = str(random.randint(10, 100) * 100)
-        card = cardGen.generate()
+        data["Name"].append(namesGen[random.randrange(2)].generate())
+        data["Passport"].append(passportGen.generate())
+        data["Snils"].append(snilsGen.generate())
+        data["Symptoms"].append(sympGen.generate())
+        data["Analyzis"].append(analyzisGen.generate())
+        data["Doctor"].append(random.choice(doctors))
+        data["DateStart"].append(dateGen.generate())
+        data["DateEnd"].append(dateGen.generate())
+        data["Price"].append(str(random.randint(10, 100) * 100))
+        data["Card"].append(cardGen.generate())
 
-        out.write(
-            "\n".join(
-                [
-                    name,
-                    passport,
-                    snils,
-                    curSymptoms,
-                    doctor,
-                    start,
-                    curAnalyzis,
-                    end,
-                    price,
-                    card,
-                    "\n",
-                ]
-            )
-        )
-
-    out.close()
+    df = pandas.DataFrame(data)
+    df.to_csv(f"{out_file}.csv", index=False)
