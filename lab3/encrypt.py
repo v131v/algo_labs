@@ -1,5 +1,5 @@
 import hashlib
-from tkinter import Tk, Label, Button, filedialog, StringVar, OptionMenu, Entry
+from tkinter import Tk, Label, Button, filedialog, StringVar, OptionMenu
 
 
 def encrypt_numbers(file_path, algorithm, salt_option):
@@ -43,29 +43,30 @@ def browse_file():
         status_label.config(text="Encryption completed. Check 'encrypted_numbers.txt'")
 
 
-root = Tk()
-root.title("Phone Number Encryption")
+if __name__ == "__main__":
+    root = Tk()
+    root.title("Phone Number Encryption")
 
-algorithms = ["MD5", "SHA1", "SHA256"]
+    algorithms = ["MD5", "SHA1", "SHA256"]
 
-salt_options = ["No Salt", "Numeric Salt", "Alphabetic Salt"]
+    salt_options = ["No Salt", "Numeric Salt", "Alphabetic Salt"]
 
-algorithm_var = StringVar(root)
-algorithm_var.set(algorithms[0])
+    algorithm_var = StringVar(root)
+    algorithm_var.set(algorithms[0])
 
-algorithm_menu = OptionMenu(root, algorithm_var, *algorithms)
-algorithm_menu.pack(pady=10)
+    algorithm_menu = OptionMenu(root, algorithm_var, *algorithms)
+    algorithm_menu.pack(pady=10)
 
-salt_option_var = StringVar(root)
-salt_option_var.set(salt_options[0])
+    salt_option_var = StringVar(root)
+    salt_option_var.set(salt_options[0])
 
-salt_option_menu = OptionMenu(root, salt_option_var, *salt_options)
-salt_option_menu.pack(pady=10)
+    salt_option_menu = OptionMenu(root, salt_option_var, *salt_options)
+    salt_option_menu.pack(pady=10)
 
-browse_button = Button(root, text="Select File", command=browse_file)
-browse_button.pack(pady=10)
+    browse_button = Button(root, text="Select File", command=browse_file)
+    browse_button.pack(pady=10)
 
-status_label = Label(root, text="")
-status_label.pack()
+    status_label = Label(root, text="")
+    status_label.pack()
 
-root.mainloop()
+    root.mainloop()
